@@ -1,6 +1,10 @@
 #include "Matriz.h"
 #include <string>
 
+#include <iostream>
+
+using namespace std;
+
 Matriz::Matriz(){
 
 }
@@ -47,3 +51,47 @@ string Matriz::getNombre(){
 	return nombre;
 }
 
+
+Matriz Matriz::operator>(int numeros){
+	int** retMatrix = new int*[size];
+	for (int i = 0; i < 2; ++i)
+	{
+		retMatrix[i]=new int[size];
+	}
+
+	for (int i = 0; i < size; ++i)
+	{
+		for (int j = 0; j < size; ++j)
+		{
+			retMatrix[i][j] = matriz[i][j]*numeros;
+		}
+	}
+	string nombresillo;
+	cout<<"Ingrese un nombresillo: "<<endl;
+	cin>>nombresillo;
+	Matriz x(nombresillo,retMatrix,2);
+	return x;
+
+}
+
+Matriz Matriz::operator&(Matriz p_matrix){
+	int** retMatrix = new int*[size];
+	for (int i = 0; i < 2; ++i)
+	{
+		retMatrix[i]=new int[size];
+	}
+
+	for (int i = 0; i < size; ++i)
+	{
+		for (int j = 0; j < size; ++j)
+		{
+			retMatrix[i][j] = matriz[i][j]*p_matrix.getMatriz()[i][j];
+		}
+	}
+	string nombresillo;
+	cout<<"Ingrese un nombresillo: "<<endl;
+	cin>>nombresillo;
+	Matriz x(nombresillo,retMatrix,2);
+	return x;
+
+}

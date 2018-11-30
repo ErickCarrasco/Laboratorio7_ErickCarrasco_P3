@@ -8,6 +8,7 @@
 
 using namespace std;
 
+
 //Provisiona una matrix de nxn enteros
 int** createIntMatrix(int);
 
@@ -120,7 +121,7 @@ int main(){
 				int evaluador=0;
 				char operador;
 				for (int i = 0; i < cadena_user.size(); i++){
-					if (cadena_user[i]=='|'){
+					if (cadena_user[i]=='|' || cadena_user[i]=='>'||cadena_user[i]=='&' || cadena_user[i]=='+'){
 						cout<<"Taking data"<<endl;
 						operador=cadena_user[i];
 						evaluador=count;
@@ -153,6 +154,7 @@ int main(){
 				cout<<endl;
 				cout<<operador<<endl;
 
+				//OPERADOR |
 				if (operador=='|'){
 					int m1;
 					int m2;
@@ -172,30 +174,112 @@ int main(){
 							m2=i;
 						}
 					}
+					bool verificador_sizes=false;
+
+					if (lista.at(m1)->getSize()==lista.at(m2)->getSize()){
+						verificador_sizes=true;
+					}
+
+					if (verificador_sizes){
+						Matriz x = *lista.at(m1)|*lista.at(m2);
+						Matriz* x1 = &x;
+						lista.push_back(x1);
+						for (int i = 0; i < 2; ++i)
+						{
+							for (int j = 0; j < 2; ++j)
+							{
+								cout<<" "<<lista.at(lista.size()-1)->getMatriz()[i][j]<<endl;
+							}
+							cout<<endl;	
+						}
+
+						cout<<endl;
+					}
+
+
 				}
 
-				bool verificador_sizes=false;
+				//OPERADOR &
+				if(operador=='&'){
+					int m1;
+					int m2;
 
-				if (lista.at(m1)->getSize()==lista.at(m2)->getSize()){
-					verificador_sizes=true;
+					//for 1
+					for (int i = 0; i < lista.size(); ++i)
+					{
+						if (lista.at(i)->getNombre()==nombre1){
+							m1=i;
+						}
+					}
+
+					//For 2
+					for (int i = 0; i < lista.size(); ++i)
+					{
+						if (lista.at(i)->getNombre()==nombre2){
+							m2=i;
+						}
+					}
+					bool verificador_sizes=false;
+
+					if (lista.at(m1)->getSize()==lista.at(m2)->getSize()){
+						verificador_sizes=true;
+					}
+
+					if (verificador_sizes){
+						Matriz x = *lista.at(m1)&*lista.at(m2);
+						Matriz* x1 = &x;
+						lista.push_back(x1);
+						for (int i = 0; i < 2; ++i)
+						{
+							for (int j = 0; j < 2; ++j)
+							{
+								cout<<" "<<lista.at(lista.size()-1)->getMatriz()[i][j]<<endl;
+							}
+							cout<<endl;	
+						}
+
+						cout<<endl;
+					}
 				}
+				if (operador=='>'){
+					/*
 
-				if (verificador_sizes){
-					Matriz x = *lista.at(m1)|*lista.at(m2);
+					int m1;
+					int m2;
+
+					//for 1
+					for (int i = 0; i < lista.size(); ++i)
+					{
+						if (lista.at(i)->getNombre()==nombre1){
+							m1=i;
+						}
+					}
+
+					//For 2
+					for (int i = 0; i < lista.size(); ++i)
+					{
+						if (lista.at(i)->getNombre()==nombre2){
+							m2=i;
+						}
+					}
+
+					stringstream convertidor(nombre2);
+					int num2_er= 0;
+					geek>>num2_er;
+					Matriz x = *lista.at(m1)>*num2_er;
 					Matriz* x1 = &x;
 					lista.push_back(x1);
-					for (int i = 0; i < 2; ++i)
-					{
-						for (int j = 0; j < 2; ++j)
-						{
-							cout<<" "<<lista.at(2)->getMatriz()[i][j]<<endl;
+					for (int i = 0; i < 2; ++i)	{
+						for (int j = 0; j < 2; ++j){
+							cout<<" "<<lista.at(lista.size()-1)->getMatriz()[i][j]<<endl;
 						}
 						cout<<endl;	
 					}
 
 					cout<<endl;
+					*/
+					
 				}
-
 
 			}
 			break;

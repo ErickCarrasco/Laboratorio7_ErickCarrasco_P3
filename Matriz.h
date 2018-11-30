@@ -18,7 +18,8 @@ class Matriz{
 		void determinante();
 		Matriz operator|(Matriz);
 		int operator ++();
-
+		Matriz operator>(int);
+		Matriz operator&(Matriz);
 		string getNombre();
 		void setNombre(string);
 		int getSize();

@@ -1,4 +1,5 @@
 #include "Matriz.h"
+#include <string>
 
 Matriz::Matriz(){
 
@@ -36,5 +37,13 @@ Matriz Matriz::operator|(Matriz p_matrix){
 
 int** Matriz::getMatriz(){
 	return matriz;
+}
+
+int Matriz::getSize(){
+	return size;
+}
+
+string Matriz::getNombre(){
+	return nombre;
 }
 

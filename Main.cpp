@@ -4,6 +4,8 @@
 
 #include <vector>
 
+#include <sstream>
+
 using namespace std;
 
 //Provisiona una matrix de nxn enteros
@@ -66,6 +68,11 @@ int main(){
 
 			case 2:
 			{
+				for (int i = 0; i < lista.size(); ++i){
+					int num =lista.at(i)->getSize();
+					printIntMatrix(lista.at(i)->getMatriz(), num);
+				}
+				/*
 				Matriz x = *lista.at(0)|*lista.at(1);
 				Matriz* x1 = &x;
 				lista.push_back(x1);
@@ -74,27 +81,128 @@ int main(){
 					for (int j = 0; j < 2; ++j)
 						{
 							cout<<" "<<lista.at(2)->getMatriz()[i][j]<<endl;
-						}	/* code */
+						}	
 				}
+				*/
 
 			}			
 			break;
 
 			case 3:
 			{
+				int pos;
+				for (int i = 0; i < lista.size(); ++i){
+					int num =lista.at(i)->getSize();
+					printIntMatrix(lista.at(i)->getMatriz(), num);
+				}
+				cout<<endl;
+				cout<<"Ingrese el numero de pos a borrar: "<<endl;
+				cin>>pos;
+				if(pos<0 || pos>lista.size()-1){
+					cout<<"FUera del rango"<<endl;
+				}else{
+					lista.erase(lista.begin()+pos, lista.begin()+pos+1);
+				}
+
+				
 
 			}
 			break;
 
 			case 4:
 			{
+				string cadena_user;
+				cout<<"Ingrese un string para efecutar una operacion: "<<endl;
+				cout<<"Ejemplo* A|B"<<endl;
+				cin>>cadena_user;
+
+				int count=0;
+				int evaluador=0;
+				char operador;
+				for (int i = 0; i < cadena_user.size(); i++){
+					if (cadena_user[i]=='|'){
+						cout<<"Taking data"<<endl;
+						operador=cadena_user[i];
+						evaluador=count;
+					}
+					count++;
+				}
+
+				stringstream ip1;
+				stringstream ip2;
+				string nombre1;
+				string nombre2;
+				char ValueX;
+				bool verify=true;
+				for (int i = 0; i < cadena_user.size(); ++i)
+				{
+					if (cadena_user[i]=='|')
+					{
+						verify=false;
+					}else{
+						if (verify){
+							ip1>>cadena_user[i];
+						}else{
+							ip2>>cadena_user[i];
+						}
+					}
+				}
+				nombre1=ip1.str();
+				nombre2=ip2.str();
+
+				cout<<endl;
+				cout<<operador<<endl;
+
+				if (operador=='|'){
+					int m1;
+					int m2;
+
+					//for 1
+					for (int i = 0; i < lista.size(); ++i)
+					{
+						if (lista.at(i)->getNombre()==nombre1){
+							m1=i;
+						}
+					}
+
+					//For 2
+					for (int i = 0; i < lista.size(); ++i)
+					{
+						if (lista.at(i)->getNombre()==nombre2){
+							m2=i;
+						}
+					}
+				}
+
+				bool verificador_sizes=false;
+
+				if (lista.at(m1)->getSize()==lista.at(m2)->getSize()){
+					verificador_sizes=true;
+				}
+
+				if (verificador_sizes){
+					Matriz x = *lista.at(m1)|*lista.at(m2);
+					Matriz* x1 = &x;
+					lista.push_back(x1);
+					for (int i = 0; i < 2; ++i)
+					{
+						for (int j = 0; j < 2; ++j)
+						{
+							cout<<" "<<lista.at(2)->getMatriz()[i][j]<<endl;
+						}
+						cout<<endl;	
+					}
+
+					cout<<endl;
+				}
+
 
 			}
 			break;
 
 			case 5:
 			{
-
+				value=1000;
 			}
 			break;
 
